@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Elements
     const oldTestamentList = document.getElementById('old-testament-list');
     const newTestamentList = document.getElementById('new-testament-list');
+    const introductionList = document.getElementById('introduction-list');
     const bibleText = document.getElementById('bible-text');
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const sidebar = document.getElementById('sidebar');
@@ -207,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Search functionality
     searchInput.addEventListener('input', function(e) {
         const searchTerm = e.target.value.toLowerCase();
-        const allBooks = [...oldTestamentList.children, ...newTestamentList.children];
+        const allBooks = [...introductionList.children, ...oldTestamentList.children, ...newTestamentList.children];
         
         allBooks.forEach(li => {
             const bookName = li.textContent.toLowerCase();
@@ -247,19 +248,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     function populateBookLists() {
+        introductionList.innerHTML = '';
         oldTestamentList.innerHTML = '';
         newTestamentList.innerHTML = '';
         
         for (const book in books) {
-            if (book === '---' || book === ':---' || book === 'Introdução') continue;
+            if (book === '---' || book === ':---') continue;
             
             const li = document.createElement('li');
             li.textContent = book;
             li.setAttribute('data-range', books[book]);
             li.setAttribute('data-book', book);
             
-            // Determine which testament
-            if (newTestamentBooks.includes(book)) {
+            // Determine which section
+            if (book === 'Introdução') {
+                introductionList.appendChild(li);
+            } else if (newTestamentBooks.includes(book)) {
                 newTestamentList.appendChild(li);
             } else {
                 oldTestamentList.appendChild(li);
