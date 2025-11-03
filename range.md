@@ -57,20 +57,20 @@
 | Segunda Epístola Aos Coríntios | 11165-11244 |
 | Epístola Aos Gálatas | 11245-11296 |
 | Epístola Aos Efésios | 11297-11338 |
-| Epístola Aos Filipenses | 11339-11368 |
-| Epístola Aos Colossenses | 11369-11414 |
-| Primeira Epístola Aos Tessalonicenses | 11415-11446 |
-| Segunda Epístola Aos Tessalonicenses | 11447-11464 |
+| Epístola Aos Filipenses | 11339-11372 |
+| Epístola Aos Colossenses | 11373-11418 |
+| Primeira Epístola Aos Tessalonicenses | 11419-11448 |
+| Segunda Epístola Aos Tessalonicenses | 11449-11464 |
 | Primeira Epístola A Timóteo | 11465-11510 |
-| Segunda Epístola A Timóteo | 11511-11538 |
-| Epístola A Tito | 11539-11558 |
-| Epístola A Filemon | 11559-11570 |
-| Epístola Aos Hebreus | 11571-11684 |
-| Epístola De São Tiago | 11685-11724 |
-| Primeira Epístola De São Pedro | 11725-11774 |
-| Segunda Epístola De São Pedro | 11775-11798 |
-| Primeira Epistola De Sao João | 11799-11854 |
-| Segunda Epístola De São João | 11855-11864 |
-| Terceira Epístola De São João | 11865-11876 |
-| Epístola De São Judas | 11877-11896 |
-| Apocalipse | 11897-12029 |
+| Segunda Epístola A Timóteo | 11511-11532 |
+| Epístola A Tito | 11533-11552 |
+| Epístola A Filemon | 11553-11564 |
+| Epístola Aos Hebreus | 11565-11678 |
+| Epístola De São Tiago | 11679-11716 |
+| Primeira Epístola De São Pedro | 11717-11766 |
+| Segunda Epístola De São Pedro | 11767-11790 |
+| Primeira Epistola De Sao João | 11791-11846 |
+| Segunda Epístola De São João | 11847-11856 |
+| Terceira Epístola De São João | 11857-12026 |
+| Epístola De São Judas | 11873-11892 |
+| Apocalipse | 11893-12026 |
