@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const increaseFontBtn = document.getElementById('increase-font');
     const decreaseFontBtn = document.getElementById('decrease-font');
     const content = document.getElementById('content');
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = themeToggleBtn ? themeToggleBtn.querySelector('.material-symbols-outlined') : null;
 
     let books = {};
     const root = document.documentElement;
@@ -19,6 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentFontSize = computedBaseSize;
     const MIN_FONT_SIZE = 14;
     const MAX_FONT_SIZE = 28;
+    const THEME_STORAGE_KEY = 'bjr-preferred-theme';
+
+    initTheme();
 
     // Books that belong to New Testament (starting from Matthew)
     const newTestamentBooks = [
@@ -138,6 +143,65 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateFontSize(newSize) {
         currentFontSize = Math.min(Math.max(newSize, MIN_FONT_SIZE), MAX_FONT_SIZE);
         root.style.setProperty('--base-font-size', currentFontSize + 'px');
+    }
+
+    function initTheme() {
+        if (!themeToggleBtn) {
+            return;
+        }
+
+        const storedTheme = getStoredTheme();
+        if (storedTheme) {
+            applyTheme(storedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            applyTheme('dark');
+        } else {
+            applyTheme('light');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const nextTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+            applyTheme(nextTheme);
+        });
+    }
+
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            document.body.dataset.theme = 'dark';
+            themeToggleBtn.setAttribute('aria-pressed', 'true');
+            themeToggleBtn.setAttribute('title', 'Alternar para modo claro');
+            themeToggleBtn.setAttribute('aria-label', 'Alternar para modo claro');
+            if (themeIcon) {
+                themeIcon.textContent = 'light_mode';
+            }
+        } else {
+            delete document.body.dataset.theme;
+            themeToggleBtn.setAttribute('aria-pressed', 'false');
+            themeToggleBtn.setAttribute('title', 'Alternar modo noturno');
+            themeToggleBtn.setAttribute('aria-label', 'Alternar modo noturno');
+            if (themeIcon) {
+                themeIcon.textContent = 'dark_mode';
+            }
+            theme = 'light';
+        }
+
+        storeTheme(theme);
+    }
+
+    function storeTheme(theme) {
+        try {
+            localStorage.setItem(THEME_STORAGE_KEY, theme);
+        } catch (error) {
+            /* ignore storage errors */
+        }
+    }
+
+    function getStoredTheme() {
+        try {
+            return localStorage.getItem(THEME_STORAGE_KEY);
+        } catch (error) {
+            return null;
+        }
     }
 
     // Search functionality

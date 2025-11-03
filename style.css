@@ -6,17 +6,47 @@
 }
 
 :root {
-    --primary-color: #8B4513;
-    --secondary-color: #CD853F;
-    --text-color: #2c2c2c;
-    --bg-color: #f8f5f0;
-    --sidebar-bg: #2c3e50;
-    --sidebar-text: #ecf0f1;
-    --accent-gold: #d4af37;
-    --verse-number: #8B4513;
-    --border-color: #d4cfc4;
-    --shadow: rgba(0, 0, 0, 0.1);
+    --primary-color: #0b3d91;
+    --secondary-color: #165fbf;
+    --header-gradient-start: #0b3d91;
+    --header-gradient-end: #165fbf;
+    --text-color: #162433;
+    --bg-color: #f6f8fb;
+    --sidebar-bg: #071730;
+    --sidebar-text: #f6f7fb;
+    --accent-gold: #FFD24D;
+    --verse-number: #0b3d91;
+    --border-color: rgba(11, 61, 145, 0.12);
+    --shadow: rgba(8, 24, 56, 0.25);
+    --content-bg: #ffffff;
+    --muted-text: #555555;
+    --intro-bg: rgba(11, 61, 145, 0.06);
+    --blockquote-text: #444444;
+    --input-bg: rgba(255, 255, 255, 0.1);
+    --input-bg-focus: rgba(255, 255, 255, 0.15);
     --base-font-size: 20px;
+}
+
+body[data-theme="dark"] {
+    color-scheme: dark;
+    --primary-color: #FFD24D;
+    --secondary-color: #92b8ff;
+    --header-gradient-start: #041024;
+    --header-gradient-end: #0a2347;
+    --text-color: #e9edf5;
+    --bg-color: #0b1322;
+    --sidebar-bg: #050b17;
+    --sidebar-text: #f7f8ff;
+    --accent-gold: #FFD24D;
+    --verse-number: #FFD24D;
+    --border-color: rgba(255, 210, 77, 0.25);
+    --shadow: rgba(0, 0, 0, 0.65);
+    --content-bg: #111a2d;
+    --muted-text: #b6c2dd;
+    --intro-bg: rgba(255, 210, 77, 0.08);
+    --blockquote-text: #d3d9ee;
+    --input-bg: rgba(255, 255, 255, 0.12);
+    --input-bg-focus: rgba(255, 255, 255, 0.2);
 }
 
 html {
@@ -32,6 +62,7 @@ body {
     line-height: 1.8;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -45,7 +76,7 @@ body {
 /* Header Styles */
 .main-header {
     grid-column: 1 / -1;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(135deg, var(--header-gradient-start) 0%, var(--header-gradient-end) 100%);
     color: white;
     padding: 1rem 2rem;
     display: flex;
@@ -88,9 +119,10 @@ body {
 .header-controls {
     display: flex;
     gap: 0.5rem;
+    align-items: center;
 }
 
-.font-size-btn {
+.header-button {
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.5);
     color: white;
@@ -101,15 +133,28 @@ body {
     border-radius: 6px;
     transition: all 0.3s ease;
     min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
 }
 
-.font-size-btn:hover {
+.header-button:hover {
     background: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
 }
 
-.font-size-btn:active {
+.header-button:active {
     transform: translateY(0);
+}
+
+.theme-toggle-btn {
+    padding: 0.5rem;
+}
+
+.theme-toggle-btn .material-symbols-outlined {
+    font-size: 1.35rem;
+    line-height: 1;
 }
 
 .overlay {
@@ -149,6 +194,10 @@ body {
     z-index: 10;
 }
 
+body[data-theme="dark"] .sidebar-header {
+    background: rgba(255, 255, 255, 0.04);
+}
+
 .sidebar-header h2 {
     font-family: 'Cinzel', serif;
     font-size: 1.3rem;
@@ -161,8 +210,8 @@ body {
     padding: 0.6rem;
     border: none;
     border-radius: 6px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+    background: var(--input-bg);
+    color: var(--sidebar-text);
     font-size: 0.9rem;
     transition: all 0.3s ease;
 }
@@ -173,7 +222,7 @@ body {
 
 .search-input:focus {
     outline: none;
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--input-bg-focus);
     box-shadow: 0 0 0 2px var(--accent-gold);
 }
 
@@ -228,7 +277,7 @@ body {
 /* Main Content Styles */
 .content {
     overflow-y: auto;
-    background: linear-gradient(to bottom, #ffffff 0%, var(--bg-color) 100%);
+    background: linear-gradient(to bottom, var(--content-bg) 0%, var(--bg-color) 100%);
     position: relative;
 }
 
@@ -236,7 +285,7 @@ body {
     max-width: 900px;
     margin: 0 auto;
     padding: 3rem 2rem;
-    background-color: white;
+    background-color: var(--content-bg);
     min-height: 100%;
     box-shadow: 0 0 30px var(--shadow);
 }
@@ -346,8 +395,8 @@ body {
 /* Introduction and special text */
 .introduction {
     font-style: italic;
-    color: #555;
-    background: #f9f9f9;
+    color: var(--muted-text);
+    background: var(--intro-bg);
     padding: 1.5rem;
     border-left: 4px solid var(--accent-gold);
     margin: 2rem 0;
@@ -360,7 +409,7 @@ blockquote {
     padding-left: 1.5rem;
     margin: 1.5rem 0;
     font-style: italic;
-    color: #555;
+    color: var(--blockquote-text);
 }
 
 /* Scrollbar Styling */
@@ -418,7 +467,7 @@ blockquote {
         gap: 0.3rem;
     }
 
-    .font-size-btn {
+    .header-button {
         padding: 0.4rem 0.7rem;
         font-size: 0.9rem;
         min-width: 40px;
@@ -618,30 +667,3 @@ blockquote {
     }
 }
 
-/* ---------------------------------------------------------------------------
-   Alternative Palette: Dark Blue + Yellow
-   Usage: add `class="palette-2"` to the <body> element to enable this palette.
-   This keeps dark blue and yellow as requested and overrides the root variables
-   so all components automatically pick up the new colors.
-----------------------------------------------------------------------------*/
-.palette-2 {
-    --primary-color: #0b3d91;      /* deep dark blue (titles, primary accents) */
-    --secondary-color: #165fbf;    /* slightly brighter blue for accents */
-    --text-color: #162433;         /* dark slate for readable body text */
-    --bg-color: #f6f8fb;           /* very light blue/white page background */
-    --sidebar-bg: #071730;        /* nearly-black navy for sidebar */
-    --sidebar-text: #f6f7fb;      /* soft white for sidebar text */
-    --accent-gold: #FFD24D;       /* warm yellow for highlights */
-    --verse-number: #0b3d91;      /* verse numbers in dark blue */
-    --border-color: rgba(11,61,145,0.12);
-    --shadow: rgba(8,24,56,0.25);
-}
-
-/* Small tweak: make scrollbar thumbs a matching blue/yellow when palette-2 is active */
-.palette-2 .sidebar::-webkit-scrollbar-thumb {
-    background: var(--accent-gold);
-}
-
-.palette-2 .content::-webkit-scrollbar-thumb {
-    background: var(--secondary-color);
-}
